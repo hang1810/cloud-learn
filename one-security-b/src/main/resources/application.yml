@@ -1,0 +1,32 @@
+server:
+  port: 8802
+  servlet:
+      session:
+        timeout: 60s
+
+spring:
+  application:
+    name: one-security-b
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    #当前数据源操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver      #mysql驱动包
+    url: jdbc:mysql://localhost:3306/cloud_learn?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+  main:
+    # Spring Boot 2.1 需要显式开启bean override
+    allow-bean-definition-overriding: true
+
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+
+  session:
+    store-type: redis
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  #  mapperLocations: classpath:mapper/*.xml
+  #  type-aliases-package: com.atguigu.springcloud.entities  #所有entity别名类所在包
