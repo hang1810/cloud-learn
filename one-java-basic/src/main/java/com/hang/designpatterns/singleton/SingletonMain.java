@@ -28,5 +28,11 @@ public class SingletonMain {
         DoubleSyncLazySingleton doubleSyncLazySingleton1 = DoubleSyncLazySingleton.getLazySingleton();
         System.out.println(doubleSyncLazySingleton == doubleSyncLazySingleton1);
 
+
+        //静态内部类
+        SingletonStaticInnerClass singletonStaticInnerClass = SingletonStaticInnerClass.getSingletonStaticInnerClass();
+        SingletonStaticInnerClass singletonStaticInnerClass1 = SingletonStaticInnerClass.getSingletonStaticInnerClass();
+        System.out.println(singletonStaticInnerClass==singletonStaticInnerClass1);
+
     }
 }
