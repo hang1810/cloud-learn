@@ -5,15 +5,17 @@ import java.util.List;
 
 /**
  * @author Hang
- * @date 2020-09-26 22:00
- * 不安全的集合
+ * @date 2020-09-27 20:16
+ * 不安全的集合通过sync 来保证安全
  */
-public class UnSaleList {
+public class SaleListBySync {
     public static void main(String[] args) {
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < 10000; i++) {
             new Thread(()->{
-                list.add(Thread.currentThread().getName());
+                synchronized (list){
+                    list.add(Thread.currentThread().getName());
+                }
             }).start();
         }
         try {
@@ -23,4 +25,5 @@ public class UnSaleList {
         }
         System.out.println(list.size());//正确为10000
     }
+
 }

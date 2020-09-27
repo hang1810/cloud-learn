@@ -17,7 +17,7 @@ public class UnSafeBuyTicket {
         t3.start();
     }
 }
-class BuyTicket implements Runnable {
+ class  BuyTicket implements Runnable {
 
     //票
     private int ticket=10;
@@ -34,14 +34,16 @@ class BuyTicket implements Runnable {
         }
     }
 
-    private void buy() throws InterruptedException {
-        //判断是否有票
-        if (ticket<=0){
-            flag=false;
-            return;
-        }
-        Thread.sleep(100);
-        //买票
-        System.out.println(Thread.currentThread().getName()+"买到第"+ticket--+"票");
+    //添加 synchronized 锁
+//    private  void buy() throws InterruptedException {
+private synchronized void buy() throws InterruptedException {
+    //判断是否有票
+    if (ticket<=0){
+        flag=false;
+        return;
     }
+    Thread.sleep(100);
+    //买票
+    System.out.println(Thread.currentThread().getName()+"买到第"+ticket--+"票");
 }
+ }
