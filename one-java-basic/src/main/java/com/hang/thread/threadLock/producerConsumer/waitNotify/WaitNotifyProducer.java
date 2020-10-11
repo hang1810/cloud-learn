@@ -18,8 +18,8 @@ public class WaitNotifyProducer implements Runnable {
     public void run() {
             while (true){
                 try {
-                    Thread.sleep(1000);
                     waitNotifyStorage.product();
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

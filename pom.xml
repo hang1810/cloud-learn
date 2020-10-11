@@ -16,6 +16,9 @@
         <module>one-java-basic</module>
         <module>one-test-package</module>
         <module>one-test-packeage-war</module>
+        <module>eureka-feign-server</module>
+        <module>eureka-feign-upload-server</module>
+        <module>eureka-feign-upload-client</module>
     </modules>
     <!-- 表示该工程是一个父工程 -->
     <packaging>pom</packaging>

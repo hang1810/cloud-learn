@@ -20,8 +20,8 @@ public class WaitNotifyStorage {
 
     public void product(){
         synchronized (list){
-            while (list.size()+1>MAX_SIZE){//超出最大容量退出
-                System.out.println("【生产者" + Thread.currentThread().getName() + "】仓库已满");
+            while (list.size() == MAX_SIZE){//超出最大容量退出
+                System.out.println("【生产者" + Thread.currentThread().getName() + "】当前库存数量达到最大值：" + MAX_SIZE + "条");
                 try {
                     list.wait();
                 } catch (InterruptedException e) {
@@ -30,8 +30,8 @@ public class WaitNotifyStorage {
             }
 
             list.add(new Object());
-            System.out.println("【生产者" + Thread.currentThread().getName()  + "】生产一个产品，现库存" + list.size());
             list.notifyAll();
+            System.out.println("【生产者" + Thread.currentThread().getName()  + "】生产一个产品，现库存" + list.size());
         }
     }
 
@@ -44,12 +44,10 @@ public class WaitNotifyStorage {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
             }
-
             list.remove();
-            System.out.println("【消费者" + Thread.currentThread().getName()  + "】消费一个产品，现库存" + list.size());
             list.notifyAll();
+            System.out.println("【消费者" + Thread.currentThread().getName()  + "】消费一个产品，现库存" + list.size());
         }
     }
 }
