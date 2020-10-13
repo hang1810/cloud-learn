@@ -5,7 +5,7 @@ package com.hang.designpatterns.singleton;
  * @date 2020-09-17 23:59
  */
 public class DoubleSyncLazySingleton {
-    private static DoubleSyncLazySingleton doubleSyncLazySingleton;
+    private static volatile  DoubleSyncLazySingleton doubleSyncLazySingleton;
 
     //构造方法私有化
     private DoubleSyncLazySingleton(){

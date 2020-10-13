@@ -5,6 +5,7 @@ import com.hang.bean.User;
 import com.hang.mapper.UserMapper;
 import com.hang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +15,8 @@ import javax.annotation.Resource;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-//    @Autowired
-    @Resource
+     @Autowired
+    //@Resource
     private UserMapper userMapper;
 
     @Override

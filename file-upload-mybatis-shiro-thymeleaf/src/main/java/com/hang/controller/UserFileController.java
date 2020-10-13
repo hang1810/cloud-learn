@@ -104,25 +104,27 @@ public class UserFileController {
     public void download(Integer id, String openStyle, HttpServletResponse response) throws IOException {
         //获取文件信息
         UserFile userfile = userFileService.getFilesById(id);
-        //判断用户是在线打开还是下载
-        openStyle = openStyle == null ? "attachment" : openStyle;
-        if ("attachment".equals(openStyle)){
-            //更新文件下载次数
-            userfile.setDownCounts(userfile.getDownCounts()+1);
-            userFileService.update(userfile);
+        if (userfile !=null){
+            //判断用户是在线打开还是下载
+            openStyle = openStyle == null ? "attachment" : openStyle;
+            if ("attachment".equals(openStyle)){
+                //更新文件下载次数
+                userfile.setDownCounts(userfile.getDownCounts()+1);
+                userFileService.update(userfile);
+            }
+            //根据文件信息中文件的名字和文件存储的路径获取文件输入流
+            String realpath = ResourceUtils.getURL("classpath:").getPath() + "/static" + userfile.getPath();
+            //获取文件输入流
+            FileInputStream is = new FileInputStream(new File(realpath, userfile.getNewFileName()));
+            //附件下载
+            response.setHeader("content-disposition",openStyle+";fileName="+ URLEncoder.encode(userfile.getOldFileName(),"UTF-8"));
+            //获取响应输出流
+            ServletOutputStream os = response.getOutputStream();
+            //文件拷贝
+            IOUtils.copy(is,os);
+            IOUtils.closeQuietly(is);
+            IOUtils.closeQuietly(os);
         }
-        //根据文件信息中文件的名字和文件存储的路径获取文件输入流
-        String realpath = ResourceUtils.getURL("classpath:").getPath() + "/static" + userfile.getPath();
-        //获取文件输入流
-        FileInputStream is = new FileInputStream(new File(realpath, userfile.getNewFileName()));
-        //附件下载
-        response.setHeader("content-disposition",openStyle+";fileName="+ URLEncoder.encode(userfile.getOldFileName(),"UTF-8"));
-        //获取响应输出流
-        ServletOutputStream os = response.getOutputStream();
-        //文件拷贝
-        IOUtils.copy(is,os);
-        IOUtils.closeQuietly(is);
-        IOUtils.closeQuietly(os);
     }
 
     //删除文件信息

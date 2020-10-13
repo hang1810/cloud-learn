@@ -30,7 +30,8 @@ public class ShiroConfig {
          */
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
 
-
+        // 其余接口一律拦截
+        // 主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截
         filterChainDefinitionMap.put("/file/*","authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
@@ -48,7 +49,8 @@ public class ShiroConfig {
         securityManager.setRealm(userRealm);
 
         return securityManager;
-    }
+  }
+
 
     //创建realm对象，需要自定义类
     @Bean

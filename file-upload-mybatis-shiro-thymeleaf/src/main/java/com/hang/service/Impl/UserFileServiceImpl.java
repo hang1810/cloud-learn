@@ -4,12 +4,14 @@ import com.hang.bean.UserFile;
 import com.hang.mapper.UserFileMapper;
 import com.hang.service.UserFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
+@Lazy
 @Service
 public class UserFileServiceImpl implements UserFileService {
 

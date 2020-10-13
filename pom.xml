@@ -20,6 +20,8 @@
         <module>eureka-feign-upload-server</module>
         <module>eureka-feign-upload-client</module>
         <module>file-upload-mybatis-shiro-thymeleaf</module>
+        <module>shiro-admin</module>
+        <module>shiro-core</module>
     </modules>
     <!-- 表示该工程是一个父工程 -->
     <packaging>pom</packaging>
@@ -42,6 +44,10 @@
         <!--<version>8.0.19</version>-->
         <druid.version>1.1.16</druid.version>
         <mybatis.spring.boot.version>1.3.0</mybatis.spring.boot.version>
+
+        <shiro.spring.version>1.4.0</shiro.spring.version>
+        <shiro.redis.version>2.4.2.1-RELEASE</shiro.redis.version>
+        <shiro.freemarker.tags.version>0.1</shiro.freemarker.tags.version>
     </properties>
 
     <!--子模块继承之后，提供作用：锁定版本+子module不用写groupId和version -->
@@ -114,6 +120,44 @@
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.crazycake</groupId>
+                <artifactId>shiro-redis</artifactId>
+                <version>${shiro.redis.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>shiro-core</artifactId>
+                        <groupId>org.apache.shiro</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>net.mingsoft</groupId>
+                <artifactId>shiro-freemarker-tags</artifactId>
+                <version>${shiro.freemarker.tags.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>fastjson</artifactId>
+                        <groupId>com.alibaba</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>shiro-core</artifactId>
+                        <groupId>org.apache.shiro</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <!--热启动插件 -->
